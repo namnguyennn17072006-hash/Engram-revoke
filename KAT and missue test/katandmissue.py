@@ -10,7 +10,7 @@ class TestEngramEnvelopeEncryption(unittest.TestCase):
         self.suite = CipherSuite.new(
             KEMId.DHKEM_X25519_HKDF_SHA256,
             KDFId.HKDF_SHA256,
-            AEADId.AES128_GCM
+            AEADId.AES256_GCM
         )
         #Tạo cặp khóa ngẫu nhiên cho phía nhận hợp lệ (Key Committee)
         self.receiver_key = self.suite.kem.derive_key_pair(os.urandom(32))
@@ -23,7 +23,7 @@ class TestEngramEnvelopeEncryption(unittest.TestCase):
         aad = b"ObjectID:999|Version:1|PolicyHash:xyz789"
 
         #Sinh DEK và mã hóa payload
-        raw_dek = AESGCM.generate_key(bit_length=128)
+        raw_dek = AESGCM.generate_key(bit_length=256)
         payload_nonce = os.urandom(12)
         payload_ciphertext = AESGCM(raw_dek).encrypt(payload_nonce, plaintext, None)
 
@@ -52,7 +52,7 @@ class TestEngramEnvelopeEncryption(unittest.TestCase):
         valid_aad = b"ObjectID:999|Version:1|PolicyHash:ValidPolicyHash"
         tampered_aad = b"ObjectID:999|Version:2|PolicyHash:MaliciousPolicyHash"
 
-        raw_dek = AESGCM.generate_key(bit_length=128)
+        raw_dek = AESGCM.generate_key(bit_length=256)
         payload_nonce = os.urandom(12)
         _ = AESGCM(raw_dek).encrypt(payload_nonce, plaintext, None)
 
@@ -72,7 +72,7 @@ class TestEngramEnvelopeEncryption(unittest.TestCase):
     def test_misuse_ciphertext_tampering(self):
         """Misuse Test 2: Bản mã bị hỏng hoặc giả mạo (Ciphertext Corruption / Tampering)"""
         aad = b"ObjectID:999|Version:1|PolicyHash:xyz789"
-        raw_dek = AESGCM.generate_key(bit_length=128)
+        raw_dek = AESGCM.generate_key(bit_length=256)
 
         enc, sender_context = self.suite.create_sender_context(self.pk_r)
         ct = sender_context.seal(raw_dek, aad=aad)
@@ -94,7 +94,7 @@ class TestEngramEnvelopeEncryption(unittest.TestCase):
     def test_misuse_wrong_secret_key(self):
             """Misuse Test 1: Sai khóa bí mật (Wrong Secret Key)"""
             aad = b"ObjectID:999|Version:1|PolicyHash:xyz789"
-            raw_dek = AESGCM.generate_key(bit_length=128)
+            raw_dek = AESGCM.generate_key(bit_length=256)
     
             enc, sender_context = self.suite.create_sender_context(self.pk_r)
             ct = sender_context.seal(raw_dek, aad=aad)
