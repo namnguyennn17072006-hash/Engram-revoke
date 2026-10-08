@@ -2,16 +2,23 @@ import time
 
 class PolicyEngine:
     def __init__(self):
-        # Control State lưu trữ trạng thái policy của từng Object
-        self.policy_db = {
-            "OBJ-2026-001": {
-                "state": "ACTIVE", # Các trạng thái: ACTIVE, SUSPENDED, EXPIRED, REVOKED
-                "epoch": 1,
-                "policy_root": "root_hash_v1",
-                "last_verified_timestamp": time.time()
-            }
-        }
+        self.policy_db = {}
         self.used_nonces = set()
+
+    def register_policy(self, object_id: str, policy_root: str, policy_hash: str, version: int = 1):
+        """
+        đăng ký mới hoặc cập nhật policy cho bất kỳ object nào 
+        được đẩy vào hệ thống (thường gọi từ API Ingest).
+        """
+        self.policy_db[object_id] = {
+            "state": "ACTIVE",    
+            "epoch": 1,
+            "policy_root": policy_root,
+            "policy_hash": policy_hash,
+            "version": version,
+            "last_verified_timestamp": time.time()
+        }
+        print(f"[Policy Engine] Đã đăng ký thành công policy cho object: {object_id}")
 
     def update_policy_state(self, object_id: str, new_state: str):
         """Mô phỏng việc chuyển đổi trạng thái policy theo State Machine"""
@@ -80,22 +87,3 @@ class PolicyEngine:
         self.used_nonces.add(capability["nonce"])
         print("[Access Control] Hợp lệ! Cho phép Key Service tiến hành Unwrap DEK.")
         return True
-
-# --- Đoạn code chạy kiểm thử ---
-if __name__ == "__main__":
-    engine = PolicyAndCapabilityEngine()
-    cap = {"nonce": "nonce_xyz", "expiry": time.time() + 60}
-
-    try:
-        # 1. Truy cập khi đang ACTIVE (Thành công)
-        engine.request_access_gatekeeper("OBJ-2026-001", "root_hash_v1", cap)
-
-        # 2. Chuyển trạng thái sang REVOKED (Terminal State)
-        engine.update_policy_state("OBJ-2026-001", "REVOKED")
-
-        # 3. Thử xin cấp khóa lại sau khi đã Revoke (Sẽ bị chặn đứng)
-        print("\n--- Thử xin cấp khóa sau khi Revoke ---")
-        engine.request_access_gatekeeper("OBJ-2026-001", "root_hash_v1", {"nonce": "nonce_abc", "expiry": time.time() + 60})
-
-    except Exception as e:
-        print(f"[FAIL-CLOSED KÍCH HOẠT] {e}")
