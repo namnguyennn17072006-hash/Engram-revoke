@@ -1,0 +1,117 @@
+{
+ "anchors": [
+  {
+   "bridge_signature": "acbe98bc8600efc791ed6b6e7e645b4c64cd9d908884e936e5c3c86c0d0085d8b1db114aef47a2c1894ffe0b424efe21ebc34b74eb66b418e4b9d7eecec26103",
+   "epoch": 1,
+   "mmr_root": "8fce12fdd457933709d6d4e77c110a6b741d704d3a3759c337b65686fb0f6188",
+   "peak_hashes": [
+    "8fce12fdd457933709d6d4e77c110a6b741d704d3a3759c337b65686fb0f6188"
+   ],
+   "prev_anchor_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+   "timestamp": 1793452103.4442556,
+   "tree_size": 1
+  },
+  {
+   "bridge_signature": "6a7e526860623c1fc4260f8945c56f410b86310b4e57bba581eb8fa7f136b3cae87e6100de2d0b912d5218057e92ba4f70f3dc6effd8d08f110d89f52d0eca05",
+   "epoch": 2,
+   "mmr_root": "8fce12fdd457933709d6d4e77c110a6b741d704d3a3759c337b65686fb0f6188",
+   "peak_hashes": [
+    "8fce12fdd457933709d6d4e77c110a6b741d704d3a3759c337b65686fb0f6188"
+   ],
+   "prev_anchor_hash": "1c9be39b8fe26d451b1da274c03231d927ec92351e718ac1dd68a7b5030edf17",
+   "timestamp": 1793452103.5111916,
+   "tree_size": 1
+  }
+ ],
+ "capabilities": [
+  {
+   "capability": {
+    "epoch": 1,
+    "expiry": 1793452403.5111196,
+    "nonce": "5451eff3abf02e78",
+    "object_id": "OBJ-ART",
+    "rights": "read",
+    "subject": "alice"
+   },
+   "signature": "1994baf0d2daac7403c9ffb5b9d043b00822f266287b2b61535e6a90deef4495f603d34d3c3db6a3d3e8fa9dd27996f904cd9799e4b20c04ad79a89f9391c900"
+  }
+ ],
+ "config": {
+  "codec": "JSON-GCM-v1",
+  "epoch": 1,
+  "n": 5,
+  "object_id": "OBJ-ART",
+  "t": 3
+ },
+ "consistency": {
+  "from_epoch": 1,
+  "from_root": "8fce12fdd457933709d6d4e77c110a6b741d704d3a3759c337b65686fb0f6188",
+  "from_size": 1,
+  "peak_proofs": [
+   {
+    "new_peak": "8fce12fdd457933709d6d4e77c110a6b741d704d3a3759c337b65686fb0f6188",
+    "old_peak": "8fce12fdd457933709d6d4e77c110a6b741d704d3a3759c337b65686fb0f6188",
+    "sibling_path": []
+   }
+  ],
+  "to_epoch": 2,
+  "to_root": "8fce12fdd457933709d6d4e77c110a6b741d704d3a3759c337b65686fb0f6188",
+  "to_size": 1
+ },
+ "created_unix": 1793452103.51373,
+ "mmr": {
+  "root": "8fce12fdd457933709d6d4e77c110a6b741d704d3a3759c337b65686fb0f6188",
+  "size": 1
+ },
+ "objects": [
+  {
+   "object_id": "OBJ-ART",
+   "policy_hash": "0d07d48a2e63fd3e1ea21513735d055c8f266e3c4e6919a759b71ad4db09a56c",
+   "wrap": {
+    "c1": "02ed5edeeaa656ec52f3ba67645c767af79615e22327c81a5e5ae95f153a6b1da4",
+    "ciphertext": "42078181d1055f6a45a4905e9fd4deda1184b2872130ea9bb526381801f55667747d6e5df177385c71067cd71c973173",
+    "context": {
+     "codec_id": "JSON-GCM-v1",
+     "epoch": 1,
+     "object_id": "OBJ-ART",
+     "policy_hash": "0d07d48a2e63fd3e1ea21513735d055c8f266e3c4e6919a759b71ad4db09a56c",
+     "policy_root": "8fce12fdd457933709d6d4e77c110a6b741d704d3a3759c337b65686fb0f6188",
+     "version": 1
+    },
+    "nonce": "3fc0d7a215d5c5b244bfe41f"
+   }
+  }
+ ],
+ "policy_events": [
+  {
+   "epoch": 1,
+   "new_state": "ACTIVE",
+   "object_id": "OBJ-ART",
+   "old_state": "NONE",
+   "sequence": 1,
+   "signature": "c7d6bf35d59b5f5845c5c4a792df19c2978efc7af19b2c8a056e54b4acfb6205be32c205726d3bf231014ca710b39889aea61f70128e00c26d8903e4e6b2df03",
+   "signer": "e9be92bb9b113f63856a0c6c58f10bd515a92810904a3c0470c46097de544125"
+  }
+ ],
+ "policy_records": {
+  "OBJ-ART": {
+   "epoch": 1,
+   "sequence": 1,
+   "state": "ACTIVE"
+  }
+ },
+ "public_keys": {
+  "authority_pk": "e9be92bb9b113f63856a0c6c58f10bd515a92810904a3c0470c46097de544125",
+  "bridge_pk": "90c679f6b3376c734b7a2f223103c379c9675314303a78108a66ef7100ee4a2f",
+  "dkg_joint_public_key": "0360d8449d148510ca9c5bef58e7d0d3d14196ae3386d6cfd4cd88e15e02b232db",
+  "dkg_public_shares": {
+   "1": "02d48117ddef5f0b592dd187546b953466c433e6a4be32a376d479aea402e10cd3",
+   "2": "03777963d7d26e405361704e11ed83d90c16f491d77e39456a974f0f6ba4b92c67",
+   "3": "02f86a4e7e775104d4bded0e13a2efeaacd9df9148ea6ee8f890d574e2693d1dea",
+   "4": "02fc48d672b0882c460ba860b3f022385e1a4e3e363e4370972b384e113526624d",
+   "5": "03d590bf4b84169e999d3de7b08af1870c44a5860a64b35818e3d559c18bf411ee"
+  },
+  "issuer_pk": "e3c967b2a0488243202bd6d3dc21685fb021694db8ebee8189c11521fd6864fb"
+ },
+ "schema": "engram-revoke/audit-bundle/v1"
+}
